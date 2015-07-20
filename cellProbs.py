@@ -204,6 +204,10 @@ ovi_z  = ion3[2]
 ovi_l  = ion3[3]
 
 
+print mgii_nH
+print mgii_t
+print mgii_z
+print mgii_l
 
 s = 'Cells that do not have HI absorption\n\n'
 fo.write(s)

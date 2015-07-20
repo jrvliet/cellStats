@@ -42,7 +42,7 @@ def printCellProperties( fo, ion, density, temp, metal, size):
     s = 'Density \t {0:.2f} \t {1:.2f} \t {2:.2f} \t {3:.2f} \t {4:.2f} \n'.format(denseMin, denseMax, denseMean, denseMed, denseStd)
     fo.write(s)
     s = 'Temperature \t {0:.2f} \t {1:.2f} \t {2:.2f} \t {3:.2f} \t {4:.2f} \n'.format(tempMin, tempMax, tempMean, tempMed, tempStd)
-    fo.write(s)
+
     s = 'Metalicity \t {0:.2f} \t {1:.2f} \t {2:.2f} \t {3:.2f} \t {4:.2f} \n'.format(metalMin, metalMax, metalMean, metalMed, metalStd)
     fo.write(s)
     s = 'Cell Size \t {0:.2f} \t {1:.2f} \t {2:.2f} \t {3:.2f} \t {4:.2f} \n'.format(sizeMin, sizeMax, sizeMean, sizeMed, sizeStd)
@@ -102,9 +102,9 @@ def findCellProps( datfile, ion):
     ind = [0, 1, 2, 3]
     ind.pop(target)
     
-    ion1 = [nH[ind[0]], t[ind[0]], z[ind[0]], l[ind[0]]
-    ion2 = [nH[ind[1]], t[ind[1]], z[ind[1]], l[ind[1]]
-    ion3 = [nH[ind[2]], t[ind[2]], z[ind[2]], l[ind[2]]
+    ion1 = [nH[ind[0]], t[ind[0]], z[ind[0]], l[ind[0]]]
+    ion2 = [nH[ind[1]], t[ind[1]], z[ind[1]], l[ind[1]]]
+    ion3 = [nH[ind[2]], t[ind[2]], z[ind[2]], l[ind[2]]]
 
     return ion1, ion2, ion3
 

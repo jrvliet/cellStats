@@ -7,7 +7,7 @@
 import numpy as np
 import scipy.stats as st
 import matplotlib.pyplot as plt
-
+from cellProbs_funcs import *
 
 
 # Calculates the probability of finding b given a

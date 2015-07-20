@@ -128,8 +128,8 @@ fo.write(s)
 s = '{0:s} \t {1:>.3} \t {2:>.3} \t {3:>.3} \t {4:>.3} \n'.format('OVI', probAgivenB(ovi,hi)*100, probAgivenB(ovi,mgii)*100, probAgivenB(ovi,civ)*100, probOVI*100)
 fo.write(s)
 
-fo.write('\n\n\n')
 
+fo.write('\n\n\n')
 
 ##########
 # Calculate the probabilities for finding each ion if HI is NOT found
@@ -139,6 +139,7 @@ fo.write('\n\n\n')
 # but not HI
 
 f = open('dat.files')
+'''
 mgii_nH, mgii_t, mgii_z, mgii_l = [], [], [], []
 civ_nH, civ_t, civ_z, civ_l = [], [], [], []
 ovi_nH, ovi_t, ovi_z, ovi_l = [], [], [], []
@@ -180,154 +181,46 @@ for fN in f:
     ftmp.close()
 f.close()
 
-
-
-# Look at MgII
 # Fraction of mgII cells that do not have hi to those that do
 mgFrac = mgiiCount / mgii.count(1)
 civFrac = civCount / civ.count(1)
 oviFrac = oviCount / ovi.count(1)
+'''
 
-# Density
-mg_nH_mean = np.log10( np.mean( mgii_nH ) )
-civ_nH_mean = np.log10( np.mean( civ_nH ) )
-ovi_nH_mean = np.log10( np.mean( ovi_nH ) )
+ion1, ion2, ion3 = findCellProps(f, 'HI')
+mgii_nH = ion1[0]
+mgii_t  = ion1[1]
+mgii_z  = ion1[2]
+mgii_l  = ion1[3]
 
-mg_nH_min = np.log10( np.min( mgii_nH ) )
-civ_nH_min = np.log10( np.min( civ_nH ) )
-ovi_nH_min = np.log10( np.min( ovi_nH ) )
+civ_nH = ion2[0]
+civ_t  = ion2[1]
+civ_z  = ion2[2]
+civ_l  = ion2[3]
 
-mg_nH_max = np.log10( np.max( mgii_nH ) )
-civ_nH_max = np.log10( np.max( civ_nH ) )
-ovi_nH_max = np.log10( np.max( ovi_nH ) )
-
-mg_nH_std = np.log10( np.std( mgii_nH ) )
-civ_nH_std = np.log10( np.std( civ_nH ) )
-ovi_nH_std = np.log10( np.std( ovi_nH ) )
-
-mg_nH_med = np.log10( np.median( mgii_nH ) )
-civ_nH_med = np.log10( np.median( civ_nH ) )
-ovi_nH_med = np.log10( np.median( ovi_nH ) )
-
-
-# Temperature
-mg_t_mean = np.log10( np.mean( mgii_t ) )
-civ_t_mean = np.log10( np.mean( civ_t ) )
-ovi_t_mean = np.log10( np.mean( ovi_t ) )
-
-mg_t_min = np.log10( np.min( mgii_t ) )
-civ_t_min = np.log10( np.min( civ_t ) )
-ovi_t_min = np.log10( np.min( ovi_t ) )
-
-mg_t_max = np.log10( np.max( mgii_t ) )
-civ_t_max = np.log10( np.max( civ_t ) )
-ovi_t_max = np.log10( np.max( ovi_t ) )
-
-mg_t_std = np.log10( np.std( mgii_t ) )
-civ_t_std = np.log10( np.std( civ_t ) )
-ovi_t_std = np.log10( np.std( ovi_t ) )
-
-mg_t_med = np.log10( np.median( mgii_t ) )
-civ_t_med = np.log10( np.median( civ_t ) )
-ovi_t_med = np.log10( np.median( ovi_t ) )
-
-
-# Metallicity
-mg_z_mean = np.log10( np.mean( mgii_z ) )
-civ_z_mean = np.log10( np.mean( civ_z ) )
-ovi_z_mean = np.log10( np.mean( ovi_z ) )
-
-mg_z_min = np.log10( np.min( mgii_z ) )
-civ_z_min = np.log10( np.min( civ_z ) )
-ovi_z_min = np.log10( np.min( ovi_z ) )
-
-mg_z_max = np.log10( np.max( mgii_z ) )
-civ_z_max = np.log10( np.max( civ_z ) )
-ovi_z_max = np.log10( np.max( ovi_z ) )
-
-mg_z_std = np.log10( np.std( mgii_z ) )
-civ_z_std = np.log10( np.std( civ_z ) )
-ovi_z_std = np.log10( np.std( ovi_z ) )
-
-mg_z_med = np.log10( np.median( mgii_z ) )
-civ_z_med = np.log10( np.median( civ_z ) )
-ovi_z_med = np.log10( np.median( ovi_z ) )
-
-
-
-# Cell size
-mg_l_mean = np.mean( mgii_l ) 
-civ_l_mean = np.mean( civ_l ) 
-ovi_l_mean =  np.mean( ovi_l ) 
-
-mg_l_min = np.min( mgii_l ) 
-civ_l_min = np.min( civ_l ) 
-ovi_l_min = np.min( ovi_l ) 
-
-mg_l_max =  np.max( mgii_l ) 
-civ_l_max = np.max( civ_l ) 
-ovi_l_max = np.max( ovi_l ) 
-
-mg_l_std = np.std( mgii_l ) 
-civ_l_std = np.std( civ_l ) 
-ovi_l_std = np.std( ovi_l ) 
-
-mg_l_med = np.median( mgii_l ) 
-civ_l_med = np.median( civ_l ) 
-ovi_l_med = np.median( ovi_l ) 
-
-
+ovi_nH = ion3[0]
+ovi_t  = ion3[1]
+ovi_z  = ion3[2]
+ovi_l  = ion3[3]
 
 
 
 s = 'Cells that do not have HI absorption\n\n'
 fo.write(s)
+printCellProperties(fo, 'MgII', mgii_nH, mgii_t, mgii_z, mgii_l)
+printCellProperties(fo, 'CIV', civ_nH, civ_t, civ_z, civ_l)
+printCellProperties(fo, 'OVI', ovi_nH, ovi_t, ovi_z, ovi_l)
 
-s = 'Typical MgII cell properties\n'
-fo.write(s)
-s = 'Property \t Min \t Max \t Mean \t Med \t Std Dev \n'
-fo.write(s)
-s = 'Density \t {0:.2f} \t {1:.2f} \t {2:.2f} \t {3:.2f} \t {4:.2f} \n'.format(mg_nH_min, mg_nH_max, mg_nH_mean, mg_nH_med, mg_nH_std)
-fo.write(s)
-s = 'Temperature \t {0:.2f} \t {1:.2f} \t {2:.2f} \t {3:.2f} \t {4:.2f} \n'.format(mg_t_min, mg_t_max, mg_t_mean, mg_t_med, mg_t_std)
-fo.write(s)
-s = 'Metalicity \t {0:.2f} \t {1:.2f} \t {2:.2f} \t {3:.2f} \t {4:.2f} \n'.format(mg_z_min, mg_z_max, mg_z_mean, mg_z_med, mg_z_std)
-fo.write(s)
-s = 'Cell Size \t {0:.2f} \t {1:.2f} \t {2:.2f} \t {3:.2f} \t {4:.2f} \n'.format(mg_l_min, mg_l_max, mg_l_mean, mg_l_med, mg_l_std)
-fo.write(s)
-s = 'Fraction of MgII absorbing cells that do not have HI absorption: {0:.2%}\n'.format(mgFrac)
-fo.write(s)
+fo.write('\n\n\n')
 
 
-s = '\nTypical CIV cell properties\n'
-fo.write(s)
-s = 'Property \t Min \t Max \t Mean \t Med \t Std Dev \n'
-fo.write(s)
-s = 'Density \t {0:.2f} \t {1:.2f} \t {2:.2f} \t {3:.2f} \t {4:.2f} \n'.format(civ_nH_min, civ_nH_max, civ_nH_mean, civ_nH_med, civ_nH_std)
-fo.write(s)
-s = 'Temperature \t {0:.2f} \t {1:.2f} \t {2:.2f} \t {3:.2f} \t {4:.2f} \n'.format(civ_t_min, civ_t_max, civ_t_mean, civ_t_med, civ_t_std)
-fo.write(s)
-s = 'Metalicity \t {0:.2f} \t {1:.2f} \t {2:.2f} \t {3:.2f} \t {4:.2f} \n'.format(civ_z_min, civ_z_max, civ_z_mean, civ_z_med, civ_z_std)
-fo.write(s)
-s = 'Cell Size \t {0:.2f} \t {1:.2f} \t {2:.2f} \t {3:.2f} \t {4:.2f} \n'.format(civ_l_min, civ_l_max, civ_l_mean, civ_l_med, civ_l_std)
-fo.write(s)
-s = 'Fraction of CIV absorbing cells that do not have HI absorption: {0:.2%}\n'.format(civFrac)
-fo.write(s)
+# Repeat for cells that do not have MgII absorption
 
-s = '\nTypical OVI cell properties\n'
-fo.write(s)
-s = 'Property \t Min \t Max \t Mean \t Med \t Std Dev \n'
-fo.write(s)
-s = 'Density \t {0:.2f} \t {1:.2f} \t {2:.2f} \t {3:.2f} \t {4:.2f} \n'.format(ovi_nH_min, ovi_nH_max, ovi_nH_mean, ovi_nH_med, ovi_nH_std)
-fo.write(s)
-s = 'Temperature \t {0:.2f} \t {1:.2f} \t {2:.2f} \t {3:.2f} \t {4:.2f} \n'.format(ovi_t_min, ovi_t_max, ovi_t_mean, ovi_t_med, ovi_t_std)
-fo.write(s)
-s = 'Metalicity \t {0:.2f} \t {1:.2f} \t {2:.2f} \t {3:.2f} \t {4:.2f} \n'.format(ovi_z_min, ovi_z_max, ovi_z_mean, ovi_z_med, ovi_z_std)
-fo.write(s)
-s = 'Cell Size \t {0:.2f} \t {1:.2f} \t {2:.2f} \t {3:.2f} \t {4:.2f} \n'.format(ovi_l_min, ovi_l_max, ovi_l_mean, ovi_l_med, ovi_l_std)
-fo.write(s)
-s = 'Fraction of OVI absorbing cells that do not have HI absorption:  {0:.2%}\n'.format(oviFrac)
-fo.write(s)
+
+
+
+
+
 
 
 

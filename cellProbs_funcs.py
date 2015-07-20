@@ -3,7 +3,7 @@
 # Mostly with writing to file
 #
 
-
+import numpy as np
 
 def printCellProperties( fo, ion, density, temp, metal, size):
 

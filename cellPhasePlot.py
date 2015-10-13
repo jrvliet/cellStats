@@ -4,14 +4,9 @@ import numpy as np
 import scipy.stats as st
 import matplotlib.pyplot as plt
 
-numbins = 50
-
-fig,((p11,p12,p13,p14), (p21,p22,p23,p24), (p31,p32,p33,p34), (p41,p42,p43,p44)) = plt.subplots(4,4,figsize=(12,12))
-plot_list = [p11, p21, p31, p41, p12, p22, p32, p42, p13, p23, p33, p43, p14, p24, p34, p44]
-
+numbins = 500
 
 ion_list = ['HI', 'MgII', 'CIV', 'OVI']
-
 
 # Read in cell data
 nH   = []
@@ -34,12 +29,12 @@ for fileName in f:
     for line in ftmp:
 
         l2 = line.split()
-        hiTmp   = float(l2[5])
-        mgiiTmp = float(l2[6])
-        civTmp  = float(l2[7])
-        oviTmp  = float(l2[8])
-        nHTmp   = float(l2[1])
-        tTmp    = float(l2[2])
+        hiTmp   = float(l2[8])
+        mgiiTmp = float(l2[9])
+        civTmp  = float(l2[10])
+        oviTmp  = float(l2[11])
+        nHTmp   = float(l2[4])
+        tTmp    = float(l2[5])
 
         hi.append(hiTmp)
         mgii.append(mgiiTmp)
@@ -52,10 +47,22 @@ for fileName in f:
 
 f.close()
 
+print np.min(hi)
+print np.max(hi)
+print np.min(mgii)
+print np.max(mgii)
+print np.min(civ)
+print np.max(civ)
+print np.min(ovi)
+print np.max(ovi)
+
 absorption = [hi, mgii, civ, ovi]
 histos = []
 xed = []
 yed = []
+
+numCells = len(hi)
+
 # Bin up the data
 for i in range(0,len(ion_list)):
 
@@ -70,14 +77,17 @@ for i in range(0,len(ion_list)):
         
         # Collect the cells that have both ion1
         # and ion2 absorption
-        for k in range(0,len(hi)):
+        print ion1, ion2
+        for k in range(0,numCells):
             
             if absorption[i][k]==1 and  absorption[j][k]==1:
                 density.append(nH[k])
                 temperature.append(t[k])
 
+        print len(density), len(temperature)
         
         H, xedges, yedges = np.histogram2d( density, temperature, bins=numbins)
+        print np.mean(H)
         extent = [xedges[0], xedges[-1], yedges[0], yedges[-1]]
         Hmasked = np.ma.masked_where(H==0,H)
         Hmasked = np.log10(Hmasked)
@@ -90,6 +100,17 @@ for i in range(0,len(ion_list)):
 
 
 # Plot the data
+
+fig,((p11,p12,p13,p14), 
+     (p21,p22,p23,p24), 
+     (p31,p32,p33,p34), 
+     (p41,p42,p43,p44)) = plt.subplots(4,4,figsize=(12,12))
+
+plot_list = [p11, p21, p31, p41, 
+             p12, p22, p32, p42, 
+             p13, p23, p33, p43, 
+             p14, p24, p34, p44]
+
 
 labels = ['(a)', '(e)', '(i)', '(m)', 
           '(b)', '(f)', '(j)', '(n)', 

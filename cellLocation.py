@@ -143,8 +143,12 @@ for i in range(0,len(ion_list)):
             ax.set_ylabel( 'y' )
         if j in radialIndex:
             ax.set_xlabel( 'r' )
+            ax.set_xlim([0,300])
             if j == radialIndex[0]:
                 ax.set_ylabel( 'Number' )
+        else:
+            ax.set_xlim([-200,200])
+            ax.set_ylim([-200,200])
 
     s = ion1 + 'SpatialLoc.png'
     plt.savefig(s, bbox_inches='tight')
